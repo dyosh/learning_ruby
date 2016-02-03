@@ -94,7 +94,7 @@ def multiple_els(arr)
   return arr.my_inject { |product, i| product * i }
 end
 
-arr = [1,2,3,2,4,5,3,3]
+# arr = [1,2,3,2,4,5,3,3]
 # arr.my_each { |num| puts num * 2 }
 # arr.my_each_with_index { |num, index| print num }
 # a = arr.my_select { |num| num == 3 }
@@ -117,28 +117,6 @@ arr = [1,2,3,2,4,5,3,3]
 # a = [1,2,3,4].my_map { |i| i + 3 }
 # print a, "\n"
 
-cube = Proc.new { |x| x ** 3 }
-a = [3,4,5].my_map(&cube)
-puts a
-
-# for num in arr
-#   puts num
-# end
-
-
-# def try
-#   if block_given?
-#     yield
-#   else
-#     "no block"
-#   end
-# end
-#
-# puts try
-# puts try { "Hello" }
-#
-# puts try do "Hello" end
-
 # cube = Proc.new { |x| x ** 3 }
-# a = [3,4,5].map!(&cube)
-# print a, "\n"
+# a = [3,4,5].my_map(&cube)
+# puts a
