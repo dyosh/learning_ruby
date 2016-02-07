@@ -81,7 +81,7 @@ def save_time_data(hour_freq_template)
 end
 
 puts "EventManager initialized."
-contents = CSV.open 'full_event_attendees.csv', headers: true, header_converters: :symbol
+contents = CSV.open 'event_attendees.csv', headers: true, header_converters: :symbol
 
 ################################################################################
 #                          ERB Template Files
