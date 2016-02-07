@@ -33,7 +33,7 @@ class RegistrationStats
   end
 
   def increase_hour_frequency(time)
-    # time has the format: yy/dd/mm h:mm
+    # time has the format: m/d/y h:mm
     @hour_frequency[self.get_hour(time)] += 1
   end
 
@@ -81,7 +81,7 @@ def save_time_data(hour_freq_template)
 end
 
 puts "EventManager initialized."
-contents = CSV.open 'event_attendees.csv', headers: true, header_converters: :symbol
+contents = CSV.open 'full_event_attendees.csv', headers: true, header_converters: :symbol
 
 ################################################################################
 #                          ERB Template Files
