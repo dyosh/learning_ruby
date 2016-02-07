@@ -1,0 +1,6 @@
+<% user_info.each do |user| %>
+  id       : <%= "#{user.id}" %>
+  reg date : <%= "#{user.reg_date}" %>
+  name     : <%= "#{user.first_name} #{user.last_name}"%>
+  phone    : <%= "#{user.home_phone} " %>
+<% end %>

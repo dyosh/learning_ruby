@@ -1,0 +1,12 @@
+Hour    Frequency
+-----------------
+<% reg_info.hour_frequency.each do |hour, freq| %>
+<%= "#{hour}        #{freq}" %>
+<% end %>
+=================
+
+Day     Frequency
+-----------------
+<% reg_info.day_frequency.each do |day, freq| %>
+<%= "#{day}     #{freq}" %>
+<% end %>
