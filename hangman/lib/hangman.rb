@@ -7,6 +7,8 @@ class Hangman
 		@rnd_word = ""
 		@max_guesses = 0
 		@guesses_left = 6
+		@playing_saved_game = false
+		@@filename = ""
 		self.word_from_file
 		self.welcome_screen
 	end
@@ -43,12 +45,12 @@ class Hangman
 		if Dir.exists?("saves")
 			Dir.foreach("saves") { |filename| puts "#{filename}" }
 
-			print "Enter a filename: "
-			filename = gets.chomp
-			filename.downcase!
+			print "Enter a @filename: "
+			@filename = gets.chomp
+			@filename.downcase!
 
-			if File.exists?("saves/#{filename}")
-				lines = File.readlines("saves/#{filename}")
+			if File.exists?("saves/#{@filename}")
+				lines = File.readlines("saves/#{@filename}")
 				@displayed_word = lines[0]
 				@guessed_letters = lines[1]
 				@rnd_word = lines[2]
@@ -58,12 +60,14 @@ class Hangman
 				@displayed_word = @displayed_word.split("")
 				@rnd_word = @rnd_word.split("")
 				# trim off newlines
+				@guessed_letters = @guessed_letters[0..(@guessed_letters.size-2)]
 				@max_guesses = @max_guesses[0..(@max_guesses.size-2)].to_i
 				@guesses_left = @guesses_left[0..(@guesses_left.size-2)].to_i
 
+				@playing_saved_game = true
 				self.start_game
 			else
-				puts "#{filename} does not exist!"
+				puts "#{@filename} does not exist!"
 				self.load_game
 			end
 		else
@@ -78,24 +82,25 @@ class Hangman
 		wants_save.downcase!
 
 		if wants_save == "y"
+			puts "Currently playing saved game: #{@filename}" if @playing_saved_game 
 			print "filename: "
 			save_name = gets.chomp
 			save_name.downcase!
 			Dir.mkdir("saves") unless Dir.exists?("saves")
-			filename = "saves/#{save_name}"
-			if File.exists?(filename)
+			@filename = "saves/#{save_name}"
+			if File.exists?(@filename)
 				puts "Filename already exists, would you like to overwrite your save? (Y / N): "
 				response = gets.chomp
 				response.downcase!
 				if response == "y"
 					save_file = self.populate_save_template
-					File.open(filename, 'w') {|file| file.puts(save_file)}
+					File.open(@filename, 'w') {|file| file.puts(save_file)}
 				else
 					puts "Aborting save."
 				end
 			else
 				save_file = self.populate_save_template
-				File.open(filename, 'w') {|file| file.puts(save_file)}
+				File.open(@filename, 'w') {|file| file.puts(save_file)}
 			end
 		end
 	end
