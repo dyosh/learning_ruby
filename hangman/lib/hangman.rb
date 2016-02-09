@@ -20,7 +20,7 @@ class Hangman
 			break if @rnd_word.length >= 5 && @rnd_word.length <= 12
 		end
 		@rnd_word.downcase!
-		puts "#{@rnd_word}"
+		# puts "#{@rnd_word}"
 		@rnd_word = @rnd_word.split("")
 		@max_guesses = @rnd_word.length
 	end
@@ -42,7 +42,7 @@ class Hangman
 	def load_game
 		if Dir.exists?("saves")
 			Dir.foreach("saves") { |filename| puts "#{filename}" }
-	
+
 			print "Enter a filename: "
 			filename = gets.chomp
 			filename.downcase!
@@ -57,7 +57,7 @@ class Hangman
 
 				@displayed_word = @displayed_word.split("")
 				@rnd_word = @rnd_word.split("")
-				# trim off newlines 
+				# trim off newlines
 				@max_guesses = @max_guesses[0..(@max_guesses.size-2)].to_i
 				@guesses_left = @guesses_left[0..(@guesses_left.size-2)].to_i
 
@@ -83,7 +83,7 @@ class Hangman
 			save_name.downcase!
 			Dir.mkdir("saves") unless Dir.exists?("saves")
 			filename = "saves/#{save_name}"
-			if File.exists?(filename) 
+			if File.exists?(filename)
 				puts "Filename already exists, would you like to overwrite your save? (Y / N): "
 				response = gets.chomp
 				response.downcase!
@@ -107,7 +107,7 @@ class Hangman
 		# change format of variables to strings
 		# trim off "\n" at end to prevent newlines being inserted into the save_template.erb file
 		@displayed_word = @displayed_word.join("")
-		@displayed_word = @displayed_word[0..(@displayed_word.size-2)] 
+		@displayed_word = @displayed_word[0..(@displayed_word.size-2)]
 		@rnd_word = @rnd_word.join("")
 		@rnd_word = @rnd_word[0..(@rnd_word.size-2)]
 
@@ -147,10 +147,10 @@ class Hangman
 		if @displayed_word.join("") == @rnd_word.join("")
 			puts "You've won!!! :)"
 			exit(1)
-		end		
+		end
 	end
 
-	def start_game		
+	def start_game
 		puts "***[PLAY GAME]***"
 		while @guesses_left > 0
 			letter_found = false
@@ -168,9 +168,9 @@ class Hangman
 			self.display_guess
 			self.game_over?
 			@guesses_left -= 1 if !letter_found   # only increase the @guesses_left if an incorrect letter was guessed
-			
+
 			self.save_game?
-			2.times {print "\n"}		
+			2.times {print "\n"}
 		end
 		puts "Game Over :(" if @guesses_left == 7
 	end
