@@ -20,7 +20,7 @@ class Hangman
 			break if @rnd_word.length >= 5 && @rnd_word.length <= 12
 		end
 		@rnd_word.downcase!
-		puts "#{@rnd_word}"
+		# puts "#{@rnd_word}"
 		@rnd_word = @rnd_word.split("")
 		@max_guesses = @rnd_word.length
 	end
